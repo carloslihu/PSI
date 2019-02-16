@@ -1,0 +1,31 @@
+{% extends 'shop/base.html' %} 
+{% block title %} Products {% endblock %} 
+{% block header %} {% endblock %} 
+
+{% block content %}
+<div class="product-detail">
+    <img src="{{ MEDIA_URL }}{{product.image}}">
+    <h1>{{product.prodName}}</h1>
+    <h2><a href="/{{product.category.catSlug}}/">{{product.category.catName}}</a></h2>
+    <p class="price">&euro;{{product.price}}</p>
+    <p>stock: {{ product.stock }}</p>
+    <p>you have: {{ having }} units of this product on your cart</p>
+    <form id="cart_add_product_form" action="/shoppingcart/add/{{product.id}}/" method="post">
+      {% csrf_token %}
+      {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+      {% endfor %}
+      {% for field in form.visible_fields %}
+        {{ field.errors }}
+        {{ field.help_text }}
+        {{ field }}<br>
+      {% endfor %}
+        <!--<input type='hidden' name='csrfmiddlewaretoken' value='yRAf1cpm811QifXyqdpOKIOaEhn7Nah1JVv2KfLH17pPu0xXvDYx5nwtT5t3zM1m' />-->
+        <input type="submit" name="submit" value="Add to cart">
+    </form>
+
+    <p>{{product.description}}</p>
+</div>
+{% endblock %} 
+
+{% block main %} {% endblock %}

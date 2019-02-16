@@ -1,0 +1,75 @@
+PSI(10/10/17) 
+ 
+***************************************************************************************************************************** 
+*                        Repaso de la semana pasada:                          * 
+***************************************************************************************************************************** 
+modelo ORM 
+ 
+defino a alto nivel un modelo logico respaldado en un modelo fisico en base de datos. 
+Todo basado en herencia. 
+Opciones: 
+  migrate 
+  makemigration del fichero manage.py (?) 
+ 
+La cadena de conexion se define en el fichero settings.py 
+ 
+Los modelos heredan de la clase django.db.models.Models 
+  Cada clase del modelo representa una entidad y debe definir todos sus campos y relaciones 
+ 
+ 
+ 
+DATABASES -> 'ENGINE' es el driver con el que django se conecta a la base de datos 
+https://docs.djangoproject.com/en/1.11/ref/settings/#databases 
+INFO QUE CONTIENE ESTA URL:{ 
+  transaccion: 
+    Es una operación. 
+    no se valida la operacion entera hasta que se realiza la ultima "suboperacion" correctamente. 
+    Si alguna falla, se deben deshacer todas las "suboperaciones"   
+  ATOMIC_REQUEST = true => todo lo que se va a hacer sobre la base de datos se hara de forma transaccional. 
+ 
+  commit: 
+    la accion de commitear la transaccion una vez completada 
+  AUTOCOMMIT = true => se hara el commit de forma automatica 
+ 
+  rollback: 
+    la accion de regresar atras en caso de que una transaccion falle 
+} 
+ 
+ 
+ 
+DATABASES = { 
+  'default':{ 
+    'ENGINE': 'django.db.backends.postgresql' 
+    'NAME': 'mydatabase' 
+    'USER': 'mydatabaseuser' 
+    'PASSWORD': 'mypassword' 
+    'HOST': '127.0.0.1' #cualquier ip valdria (?) 
+    'PORT': '5432' #cualquier puerto valdria 
+  } 
+} 
+ 
+$ export DATABASE_URL='postgres://alumnodb:alumnodb@localhost:5432/psi' 
+ 
+!python: 
+  import dj_database_url 
+  dj_database_url.config() 
+    #este metodo gestiona las cadenas de conexion como url's 
+  #habiendo hecho el export, devuelve un diccionario con las cadenas de conexion (?) 
+ 
+ 
+ 
+ 
+ 
+************************************************************************************************************* 
+*                        LO DE HOY                          * 
+************************************************************************************************************* 
+cliente = documento html visualizado en un navegador 
+El intercambio de info se hace mediante un formulario (elto. que permite enviar datos desde cliente hasta servidor) incluye pares clave-valor 
+Metodos de envio: GET y POST 
+El envio se realiza con un boton de tipo submit o de forma programatica con javascript 
+Por defecto, los datos no se validan en el envio. 
+ 
+                                  django 
+cliente ------> servidor web --------> servidor de applicaciones -----------> databases 
+ 
+WIP on master: Auto stash before merge of "master" and "origin/master"

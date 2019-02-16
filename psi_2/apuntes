@@ -1,0 +1,26 @@
+paquetes django:
+	python-pip
+	python-django
+	python-django-common
+	
+django-admin (herramienta trabajo)
+	commands
+		startproject servidor
+
+manage.py (django-admin especifico para servidor)
+	runserver
+	startapp
+
+mapeo url con vista (funcionalidad)
+	con ficheros de configuracion para el servidor
+		settings.py
+		views.py
+		url.py
+
+
+model view template
+
+httprequest
+	componente que representa todo lo que manda el cliente
+httpresponse
+		

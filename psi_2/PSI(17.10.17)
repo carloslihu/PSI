@@ -1,0 +1,60 @@
+psi 17.10.17
+
+HEROKU
+plataforma de servicio en la nube para el despliegue de apps web (GRATIS)
+	se encarga del mantenimiento hardware y ofrece servicios software para el despliegue de apps
+	permite escalar de forma rapida y sencilla
+
+requiere
+	tener cuenta de usuario
+	instalar el cliente heroku
+
+El despliegue de la app se hace a traves de git
+
+
+
+gunicorn => python
+va entre el servidor web y el servidor de apps
+
+
+
+DESPLIEGUE DE UNA APP EN HEROKU
+Informacion que proporcionar a heroku para que arranque una app python:
+	-contenedor (dynos) en los que se va a ejecutar la app -> procfile
+		+en el caso de nuestra app: gunicorn
+	-modulos python requeridos -> requirements.txt
+	-cadena de conexion a la BD -> igual que en la app local (settings.py)
+		+cambio: decir que nuestra cadena de conexion sea la que usa heroku (igual que la semana pasada (?))
+	-obtencion del contexto de la app WSGI -> wsgi.py
+En el despliegue del codigo realizado a traves de git
+	-hacen falta dos repos, uno en heroku al que se subiran los ficheros de una rama de nuestro repo de trabajo (local)
+Las acciones de administracion del servicio se pueden realizar desde la consola heroku [arrancar (ps:scale web=1) parar (ps:scale web=0), destruir (apps:destroy) ...] o desde la interfaz web
+	-heroku ps:scale=1 //esto arranca la app
+	-heroku ps:scale=0
+	-heroku apps-destroy
+	-heroku bash //abre un terminal remoto
+
+
+		git			heroku
+		 ^			   ^
+		 |			   |
+		 |			   |
+		 |			   |
+LOCAL:	psi-------->heroku
+
+
+
+hay que instalar el cliente de heroku. despues:
+	$ heroku login
+
+clone de repo
+	$ heroku git:clone -a <appname>
+	$ cd <appname>
+
+deploy changes
+	$ git add .
+	$ git commit -m "<message>"
+	$ git push heroku master
+
+
+!!!errata en pag 10!!!
